@@ -1,10 +1,10 @@
 import os
 import sys
 
-# Ensure src/ is on sys.path so tests can import packages under `src`
-# This is a simple, local fix for test collection environments that don't
-# install the package into the environment (CI, local pytest runs, etc).
+# Ensure the repository root is on sys.path so imports like `src.*` resolve.
+# Adding the repo root (not the `src/` dir itself) lets Python find the
+# `src` package when tests import `src.agent_demo...`.
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-SRC = os.path.join(ROOT, "src")
-if SRC not in sys.path:
-    sys.path.insert(0, SRC)
+if ROOT not in sys.path:
+    sys.path.insert(0, ROOT)
+

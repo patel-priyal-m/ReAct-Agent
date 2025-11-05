@@ -25,8 +25,8 @@ jobs:
         run: PYTHONPATH=src pytest
       - name: Run pytest
         env:
-          # ensure Python can import from the repository `src/` layout
-          PYTHONPATH: ${{ github.workspace }}/src
+          # ensure Python can import from the repository root so `src` is importable
+          PYTHONPATH: ${{ github.workspace }}
         run: |
           pytest -q
 
