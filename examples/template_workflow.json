@@ -1,0 +1,22 @@
+{
+  "id": "template_only",
+  "entry_inputs": {
+    "function_code": "def add(a, b):\n    return a + b\n"
+  },
+  "steps": [
+    {
+      "id": "summarize",
+      "name": "Summarize function",
+      "template": "Summarize the following function in one sentence and return JSON: {\"summary\": \"...\"}\n\n{{ inputs.function_code }}",
+      "parser": "json",
+      "outputs": ["summary"]
+    },
+    {
+      "id": "tests",
+      "name": "Generate tests",
+      "template": "Given the summary ({{ get(memory, 'summary.summary','') }}), generate a JSON array named tests with two example test names.",
+      "parser": "json",
+      "outputs": ["tests"]
+    }
+  ]
+}

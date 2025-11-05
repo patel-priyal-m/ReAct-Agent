@@ -1,0 +1,29 @@
+{
+  "id": "hybrid_demo",
+  "entry_inputs": {
+    "function_code": "def factorial(n):\n    if n == 0:\n        return 1\n    return n * factorial(n-1)\n"
+  },
+  "steps": [
+    {
+      "id": "summarize",
+      "name": "Summarize function",
+      "template": "Summarize the following function in one sentence and return JSON: {\"summary\": \"...\"}\n\n{{ inputs.function_code }}",
+      "parser": "json",
+      "outputs": ["summary"]
+    },
+    {
+      "id": "investigate",
+      "name": "Investigate with ReAct",
+      "template": "You are a ReAct agent investigating the function for potential issues. Follow the ReAct protocol and return JSON with thought/action/action_input/final_answer. Context summary: {{ memory.summary }}",
+      "parser": "react",
+      "outputs": ["investigation"]
+    },
+    {
+      "id": "final",
+      "name": "Final report",
+      "template": "Using the summary ({{ get(memory, 'summary.summary','no summary') }}) and investigation ({{ get(memory, 'investigation.react_result.final_answer', 'no final') }}), produce a short markdown report.",
+      "parser": "text",
+      "outputs": ["report"]
+    }
+  ]
+}

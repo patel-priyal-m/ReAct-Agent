@@ -1,0 +1,15 @@
+{
+  "id": "react_only",
+  "entry_inputs": {
+    "question": "What are common pitfalls of a naive recursive factorial implementation?"
+  },
+  "steps": [
+    {
+      "id": "investigate",
+      "name": "Investigate question with ReAct",
+      "template": "You are a ReAct agent answering the question: {{ inputs.question }}. Follow the ReAct protocol and return JSON with thought/action/action_input/final_answer.",
+      "parser": "react",
+      "outputs": ["investigation"]
+    }
+  ]
+}
